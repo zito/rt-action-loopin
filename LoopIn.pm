@@ -137,7 +137,6 @@ sub Commit {
          # add the new watcher and check for errors
          my ($ret, $msg) = $Ticket->AddWatcher(
             Type  => 'Cc',
-            Email => $addr,
             PrincipalId => $Principal,
          );
          if ($ret) {
