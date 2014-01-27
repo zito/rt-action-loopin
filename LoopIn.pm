@@ -8,6 +8,7 @@ package RT::Action::LoopIn;
 use strict;
 
 use base qw(RT::Action);
+use Mail::Address;
 
 my $scrip = 'Scrip:LoopIn';
 
