@@ -159,9 +159,9 @@ sub Commit {
 }
 
 sub domainauth {
-   my $domainauth = shift;
-   my $actor = shift;
-   my $loopin = shift;
+   my $domainauth = lc(shift);
+   my $actor = lc(shift);
+   my $loopin = lc(shift);
    my $loopin_domain;
    my $actor_domain;
 
@@ -171,8 +171,8 @@ sub domainauth {
    $RT::Logger->debug("$scrip: actor domain: $actor_domain, loopin domain: $loopin_domain");
    return 0 unless defined $domainauth;
    return 0 unless defined $domainauth->{$loopin_domain};
-   return 1 if $domainauth->{lc($loopin_domain)}->{lc($actor)};
-   return 1 if $domainauth->{lc($loopin_domain)}->{'*@'.lc($actor_domain)};
+   return 1 if $domainauth->{$loopin_domain}->{$actor};
+   return 1 if $domainauth->{$loopin_domain}->{'*@'.$actor_domain};
    return 0;
 }
 
