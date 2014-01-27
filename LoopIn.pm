@@ -179,9 +179,4 @@ sub domainauth {
    return 0;
 }
 
-eval "require RT::Action::LoopIn_Vendor";
-die $@ if ($@ && $@ !~ qr{^Can't locate RT/Action/LoopIn_Vendor.pm});
-eval "require RT::Action::LoopIn_Local";
-die $@ if ($@ && $@ !~ qr{^Can't locate RT/Action/LoopIn_Local.pm});
-
 return 1;
