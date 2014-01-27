@@ -12,18 +12,18 @@ use base qw(RT::Action);
 my $scrip = 'Scrip:LoopIn';
 
 # {{{ sub Describe
- sub Describe  {
+sub Describe  {
     my $self = shift;
     return (ref $self . " add new watchers from to/cc list if actor is authorized.");
- }
- # }}}
+}
+# }}}
 
 # {{{ sub Prepare
- sub Prepare  {
+sub Prepare  {
     # nothing to prepare
     return 1;
- }
- # }}}
+}
+# }}}
 
 sub Commit {
    my $self = shift;
