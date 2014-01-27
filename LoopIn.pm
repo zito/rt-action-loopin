@@ -86,11 +86,8 @@ sub Commit {
          # extract and normalize email address
          my $addr = lc $RT::Nobody->UserObj->CanonicalizeEmailAddress($addrObj->address);
 
-         # ignore the specific addresses for this queue:
-         next if lc $Queue->CorrespondAddress eq $addr or lc $Queue->CommentAddress eq $addr;
-
          # ignore any email address that looks like one for ANY of our queues:
-         next if RT::EmailParser::IsRTAddress(, $addr);
+         next if RT::EmailParser->IsRTAddress($addr);
 
          # normalize address if equivalence is defined
          if (defined($loopauth{equiv}{$addr})) {
