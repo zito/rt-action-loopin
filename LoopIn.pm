@@ -99,13 +99,15 @@ sub Commit {
          # ignore any email address that is already a watcher
          my $User = RT::User->new($RT::SystemUser);
          $User->LoadByEmail($addr);     # NOT LoadOrCreateByEmail
-         my $Principal = $User->PrincipalId if $User->Id;
-         next if ($Queue->IsCc($Principal) or
-                  $Queue->IsAdminCc($Principal) or
-                  $Ticket->IsCc($Principal) or
-                  $Ticket->IsAdminCc($Principal) or
-                  $Ticket->IsRequestor($Principal)
-                 );
+	 if ( $User->Id ) {
+	     my $Principal = $User->PrincipalId;
+	     next if ($Queue->IsCc($Principal) or
+		      $Queue->IsAdminCc($Principal) or
+		      $Ticket->IsCc($Principal) or
+		      $Ticket->IsAdminCc($Principal) or
+		      $Ticket->IsRequestor($Principal)
+		     );
+	 }
 
          # extend additional watchers list if authorized
          if ($loopin_authorized or domainauth($loopauth{domain}, $ActorAddr, $addr)) {
